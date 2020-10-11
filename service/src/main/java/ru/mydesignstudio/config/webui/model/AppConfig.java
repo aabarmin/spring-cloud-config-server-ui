@@ -1,9 +1,6 @@
 package ru.mydesignstudio.config.webui.model;
 
 import lombok.Data;
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -15,16 +12,11 @@ import java.util.Set;
  * The main class of the application - it's versioned configuration of the solution.
  */
 @Data
-@Document("config.versions")
 public class AppConfig {
-    @Id
-    private ObjectId versionId;
-
     /**
-     * Actually, this is a reference to the previous version of the @{@link AppConfig} that is used as a base
-     * for the current version of the configuration.
+     * Number of the basic version
      */
-    private ObjectId parentId;
+    private Integer parentId;
     /**
      * Version number.
      */

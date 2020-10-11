@@ -1,9 +1,6 @@
 package ru.mydesignstudio.config.webui.model;
 
 import lombok.Data;
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -16,11 +13,7 @@ import java.util.Set;
  * environment.
  */
 @Data
-@Document("config.environment")
 public class AppEnvironment {
-    @Id
-    private ObjectId versionId;
-
     /**
      * Environment key, machine-readable identifier.
      */
