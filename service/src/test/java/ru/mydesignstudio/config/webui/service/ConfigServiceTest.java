@@ -6,6 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.mydesignstudio.config.webui.model.AppConfig;
+import ru.mydesignstudio.config.webui.model.AppEnvironment;
 import ru.mydesignstudio.config.webui.model.AppPropertyValue;
 import ru.mydesignstudio.config.webui.repository.ConfigRepository;
 
@@ -21,6 +22,8 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class ConfigServiceTest {
+    @Mock
+    private EnvironmentsService environmentsService;
     @Mock
     private ConfigRepository configRepository;
     @InjectMocks
@@ -101,6 +104,29 @@ class ConfigServiceTest {
         );
 
         verify(configRepository, times(1)).saveConfig(any(AppConfig.class));
+    }
+
+    @Test
+    void promote_shouldPromoteConfigToEnvironment() {
+        final AppConfig savedConfig = new AppConfig();
+        savedConfig.setVersion(42);
+
+        when(environmentsService.findEnvironment(anyString())).thenReturn(Optional.of(new AppEnvironment()));
+        when(configRepository.findVersion(anyInt())).thenReturn(Optional.of(savedConfig));
+
+        final Optional<AppEnvironment> prodOptional = environmentsService.findEnvironment("prod");
+        final Optional<AppConfig> configOptional = configService.findVersion(42);
+
+        assertTrue(prodOptional.isPresent());
+        assertTrue(configOptional.isPresent());
+
+        final AppEnvironment environment = prodOptional.get();
+        final AppConfig config = configOptional.get();
+
+        final int promotedVersion = configService.promote(config, environment);
+
+        assertEquals(42, promotedVersion);
+        verify(environmentsService, times(1)).saveEnvironment(any(AppEnvironment.class));
     }
 
     private AppPropertyValue createProperty(String key, String value) {

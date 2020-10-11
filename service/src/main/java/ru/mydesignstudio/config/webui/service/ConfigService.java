@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import ru.mydesignstudio.config.webui.model.AppConfig;
+import ru.mydesignstudio.config.webui.model.AppEnvironment;
 import ru.mydesignstudio.config.webui.repository.ConfigRepository;
 
 import java.time.LocalDateTime;
@@ -15,6 +16,8 @@ import java.util.Optional;
 public class ConfigService {
     @Autowired
     private ConfigRepository configRepository;
+    @Autowired
+    private EnvironmentsService environmentsService;
 
     /**
      * Find all versions of the configuration.
@@ -54,5 +57,21 @@ public class ConfigService {
         savedConfig.setServices(config.getServices());
 
         return configRepository.saveConfig(savedConfig);
+    }
+
+    /**
+     * Promote a given configuration to the given environment. The method returns the version of an assinged config.
+     *
+     * @param config a config to be promoted
+     * @param environment to be used with this config
+     * @return a version of a promoted config
+     */
+    public int promote(@NonNull AppConfig config, @NonNull AppEnvironment environment) {
+        Preconditions.checkArgument(config != null, "Config should not be null");
+        Preconditions.checkArgument(environment != null, "Environment should not be null");
+
+        environment.setVersion(config.getVersion());
+        environmentsService.saveEnvironment(environment);
+        return config.getVersion();
     }
 }
