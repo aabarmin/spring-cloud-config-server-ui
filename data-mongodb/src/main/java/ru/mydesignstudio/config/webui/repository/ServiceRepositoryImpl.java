@@ -39,4 +39,10 @@ public class ServiceRepositoryImpl implements ServicesRepository {
                 .map(serviceMapper::toDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public boolean deleteService(AppService service) {
+        mongoRepository.deleteById(service.getKey());
+        return true;
+    }
 }

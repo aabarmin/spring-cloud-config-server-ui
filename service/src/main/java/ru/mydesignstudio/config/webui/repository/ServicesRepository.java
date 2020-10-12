@@ -1,5 +1,6 @@
 package ru.mydesignstudio.config.webui.repository;
 
+import org.springframework.lang.NonNull;
 import ru.mydesignstudio.config.webui.model.AppService;
 
 import java.util.List;
@@ -31,4 +32,12 @@ public interface ServicesRepository {
      * @return a collection of saved service instances.
      */
     List<AppService> findAll();
+
+    /**
+     * Delete an instance of a service.
+     *
+     * @param service instance to delete
+     * @return true if a service was deleted successfully
+     */
+    boolean deleteService(final AppService service);
 }

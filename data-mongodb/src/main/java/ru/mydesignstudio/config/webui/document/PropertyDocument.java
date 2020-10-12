@@ -38,4 +38,60 @@ public class PropertyDocument {
      * A collection that stores keys of the services that use this property.
      */
     private Set<String> services = new HashSet<>();
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getExample() {
+        return example;
+    }
+
+    public void setExample(String example) {
+        this.example = example;
+    }
+
+    public String getValidationExpression() {
+        return validationExpression;
+    }
+
+    public void setValidationExpression(String validationExpression) {
+        this.validationExpression = validationExpression;
+    }
+
+    public boolean isCommonProperty() {
+        return commonProperty;
+    }
+
+    public void setCommonProperty(boolean commonProperty) {
+        this.commonProperty = commonProperty;
+    }
+
+    public Set<String> getServices() {
+        return services;
+    }
+
+    public void setServices(Set<String> services) {
+        this.services = services;
+    }
 }

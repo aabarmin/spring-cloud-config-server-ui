@@ -33,4 +33,44 @@ public class ConfigDocument {
      * Config values for services.
      */
     private Map<String, Set<AppPropertyValue>> services = new HashMap<>();
+
+    public Integer getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
+
+    public Set<AppPropertyValue> getCommon() {
+        return common;
+    }
+
+    public void setCommon(Set<AppPropertyValue> common) {
+        this.common = common;
+    }
+
+    public Map<String, Set<AppPropertyValue>> getServices() {
+        return services;
+    }
+
+    public void setServices(Map<String, Set<AppPropertyValue>> services) {
+        this.services = services;
+    }
 }

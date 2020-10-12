@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Cloud Config</title>
+
+    <!-- Twitter Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.2/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}" />
+
+    <script src="/webjars/jquery/3.5.1/jquery.js" th:src="@{/webjars/jquery/3.5.1/jquery.js}"></script>
+    <script src="/webjars/popper.js/1.16.0/umd/popper.js" th:src="@{/webjars/popper.js/1.16.0/umd/popper.js}"></script>
+    <script src="/webjars/bootstrap/4.5.2/js/bootstrap.js" th:src="@{/webjars/bootstrap/4.5.2/js/bootstrap.js}"></script>
+</head>
+<body>
+    <div th:replace="fragments/template_header :: content" />
+
+    <div layout:fragment="subheader"></div>
+
+    <div class="container-fluid">
+        <div layout:fragment="content" class="content">
+            This is in the basic template
+        </div>
+    </div>
+
+    <div th:replace="fragments/template_confirm :: content" />
+</body>
+</html>
