@@ -13,6 +13,7 @@
 	<modules>
 		<module>service</module>
 		<module>webapp</module>
+		<module>data-mongodb</module>
 	</modules>
 
 	<groupId>ru.mydesignstudio.config</groupId>
@@ -35,11 +36,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
