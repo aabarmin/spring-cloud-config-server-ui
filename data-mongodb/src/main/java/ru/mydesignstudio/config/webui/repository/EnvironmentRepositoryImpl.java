@@ -7,7 +7,9 @@ import ru.mydesignstudio.config.webui.mapper.EnvironmentMapper;
 import ru.mydesignstudio.config.webui.model.AppEnvironment;
 import ru.mydesignstudio.config.webui.mongo.EnvironmentMongoRepository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class EnvironmentRepositoryImpl implements EnvironmentsRepository {
@@ -28,5 +30,19 @@ public class EnvironmentRepositoryImpl implements EnvironmentsRepository {
         final EnvironmentDocument document = environmentMapper.toDocument(environment);
         final EnvironmentDocument savedEnvironment = mongoRepository.save(document);
         return environmentMapper.toDto(savedEnvironment);
+    }
+
+    @Override
+    public List<AppEnvironment> findAll() {
+        return mongoRepository.findAll()
+                .stream()
+                .map(environmentMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean deleteEnvironment(AppEnvironment environment) {
+        mongoRepository.deleteById(environment.getKey());
+        return true;
     }
 }
