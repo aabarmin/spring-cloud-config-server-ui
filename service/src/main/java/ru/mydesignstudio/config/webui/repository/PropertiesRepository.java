@@ -31,4 +31,12 @@ public interface PropertiesRepository {
      * @return saved property
      */
     AppProperty saveProperty(AppProperty property);
+
+    /**
+     * Deletes a property.
+     *
+     * @param property to be deleted
+     * @return true if a property was deleted
+     */
+    boolean deleteProperty(AppProperty property);
 }

@@ -39,4 +39,10 @@ public class PropertyRepositoryImpl implements PropertiesRepository {
         final PropertyDocument savedDocument = mongoRepository.save(document);
         return propertyMapper.toDto(savedDocument);
     }
+
+    @Override
+    public boolean deleteProperty(AppProperty property) {
+        mongoRepository.deleteById(property.getKey());
+        return true;
+    }
 }

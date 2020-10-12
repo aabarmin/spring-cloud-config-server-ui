@@ -70,10 +70,16 @@ public class PropertiesService {
             throw new AppPropertyKeyNotSetException();
         }
 
-        if (propertiesRepository.findProperty(property.getKey()).isPresent()) {
-            throw new AppPropertyKeyDuplicationException();
-        }
-
         return propertiesRepository.saveProperty(property);
+    }
+
+    /**
+     * Deletes a property.
+     *
+     * @param property to be deleted
+     * @return true if a property was deleted
+     */
+    public boolean deleteProperty(AppProperty property) {
+        return propertiesRepository.deleteProperty(property);
     }
 }
