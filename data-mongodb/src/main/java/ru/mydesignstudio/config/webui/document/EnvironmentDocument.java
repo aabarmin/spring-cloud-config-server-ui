@@ -1,4 +1,8 @@
-package ru.mydesignstudio.config.webui.model;
+package ru.mydesignstudio.config.webui.document;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import ru.mydesignstudio.config.webui.model.AppPropertyValue;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -6,14 +10,14 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Environment that is used to run the application. Also stores overrides for this environment - ex. it's possible
- * having a common value defined in the shared configuration and next override this value for a particular
- * environment.
+ * MongoDB collection description class to store information about environments.
  */
-public class AppEnvironment {
+@Document("config.environments")
+public class EnvironmentDocument {
     /**
      * Environment key, machine-readable identifier.
      */
+    @Id
     private String key;
     /**
      * Human-readable name

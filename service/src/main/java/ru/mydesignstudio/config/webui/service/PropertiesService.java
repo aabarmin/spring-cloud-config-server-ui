@@ -1,8 +1,9 @@
 package ru.mydesignstudio.config.webui.service;
 
 import com.google.common.base.Preconditions;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,10 @@ import java.util.Optional;
 /**
  * A simple service that is dealing with all the registered properties.
  */
-@Slf4j
 @Service
 public class PropertiesService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(PropertiesService.class);
+
     @Autowired
     private PropertiesRepository propertiesRepository;
 
@@ -50,7 +52,7 @@ public class PropertiesService {
     public Optional<AppProperty> findProperty(@NonNull final String propertyKey) {
         Preconditions.checkArgument(StringUtils.isNoneEmpty(propertyKey), "Property should not be empty");
 
-        log.info("Looking for the property with key {}", propertyKey);
+        LOGGER.info("Looking for the property with key {}", propertyKey);
 
         return propertiesRepository.findProperty(propertyKey);
     }

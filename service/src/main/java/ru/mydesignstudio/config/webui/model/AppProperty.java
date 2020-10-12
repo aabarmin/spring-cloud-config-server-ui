@@ -1,14 +1,11 @@
 package ru.mydesignstudio.config.webui.model;
 
-import lombok.Data;
-
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Property that is used to configure the application.
  */
-@Data
 public class AppProperty {
     /**
      * Property key that is used in the application. It's assumed that this value is unique across the whole
@@ -43,4 +40,68 @@ public class AppProperty {
      * What data type should be used to store the value.
      */
     private PropertyType propertyType;
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getExample() {
+        return example;
+    }
+
+    public void setExample(String example) {
+        this.example = example;
+    }
+
+    public String getValidationExpression() {
+        return validationExpression;
+    }
+
+    public void setValidationExpression(String validationExpression) {
+        this.validationExpression = validationExpression;
+    }
+
+    public boolean isCommonProperty() {
+        return commonProperty;
+    }
+
+    public void setCommonProperty(boolean commonProperty) {
+        this.commonProperty = commonProperty;
+    }
+
+    public Set<String> getServices() {
+        return services;
+    }
+
+    public void setServices(Set<String> services) {
+        this.services = services;
+    }
+
+    public PropertyType getPropertyType() {
+        return propertyType;
+    }
+
+    public void setPropertyType(PropertyType propertyType) {
+        this.propertyType = propertyType;
+    }
 }
