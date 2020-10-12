@@ -89,17 +89,4 @@ class PropertiesServiceTest {
                 () -> propertiesService.saveProperty(property)
         );
     }
-
-    @Test
-    void saveProperty_thereShouldBeAnExceptionIfKeyIsDuplicated() {
-        when(propertiesRepository.findProperty(anyString())).thenReturn(Optional.of(new AppProperty()));
-
-        final AppProperty property = new AppProperty();
-        property.setKey("exists");
-
-        assertThrows(
-                AppPropertyKeyDuplicationException.class,
-                () -> propertiesService.saveProperty(property)
-        );
-    }
 }

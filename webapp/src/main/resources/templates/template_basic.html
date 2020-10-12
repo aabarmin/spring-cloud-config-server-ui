@@ -12,6 +12,11 @@
     <script src="/webjars/jquery/3.5.1/jquery.js" th:src="@{/webjars/jquery/3.5.1/jquery.js}"></script>
     <script src="/webjars/popper.js/1.16.0/umd/popper.js" th:src="@{/webjars/popper.js/1.16.0/umd/popper.js}"></script>
     <script src="/webjars/bootstrap/4.5.2/js/bootstrap.js" th:src="@{/webjars/bootstrap/4.5.2/js/bootstrap.js}"></script>
+
+    <!-- Misc plugins -->
+    <link rel="stylesheet" href="/webjars/select2/4.0.13/css/select2.css"
+          th:href="@{/webjars/select2/4.0.13/css/select2.css}" />
+    <script src="/webjars/select2/4.0.13/js/select2.full.js" th:src="@{/webjars/select2/4.0.13/js/select2.full.js}"></script>
 </head>
 <body>
     <div th:replace="fragments/template_header :: content" />
@@ -25,5 +30,11 @@
     </div>
 
     <div th:replace="fragments/template_confirm :: content" />
+
+    <script>
+        $(document).ready(function(){
+            $("select").select2();
+        });
+    </script>
 </body>
 </html>

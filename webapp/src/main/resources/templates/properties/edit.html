@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{template_basic}" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+
+<div layout:fragment="subheader" class="navbar navbar-light bg-light">
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link" href="/properties" th:href="@{/properties}">
+                Back
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" style="cursor: pointer" id="saveButton">
+                Save
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div layout:fragment="content">
+    <h1>
+        Edit a property
+    </h1>
+
+    <form action="/properties" th:action="@{/properties}" method="post" th:object="${property}" class="needs-validation" novalidate>
+        <div class="form-group">
+            <label>Property key</label>
+            <input type="text"
+                   class="form-control"
+                   th:field="*{key}"
+                   th:readonly="${edit_key_disabled}"
+                   th:classappend="${#fields.hasErrors('key') ? 'is-invalid' : ''}" />
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('key')}" th:errors="*{key}"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Property name</label>
+            <input type="text"
+                   class="form-control"
+                   th:field="*{name}"
+                   th:classappend="${#fields.hasErrors('key') ? 'is-invalid' : ''}" />
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Property description</label>
+            <textarea type="text"
+                      class="form-control"
+                      th:field="*{description}"
+                      th:classappend="${#fields.hasErrors('description') ? 'is-invalid' : ''}" />
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Property example</label>
+            <input type="text"
+                   class="form-control"
+                   th:field="*{example}"
+                   th:classappend="${#fields.hasErrors('example') ? 'is-invalid' : ''}" />
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('example')}" th:errors="*{example}"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Property validation expression</label>
+            <input type="text"
+                   class="form-control"
+                   th:field="*{validationExpression}"
+                   th:classappend="${#fields.hasErrors('validationExpression') ? 'is-invalid' : ''}" />
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('validationExpression')}" th:errors="*{validationExpression}"></div>
+        </div>
+
+        <div class="form-check">
+            <input type="checkbox"
+                   class="form-check-input"
+                   th:field="*{commonProperty}"
+                   th:value="true"
+                   th:classappend="${#fields.hasErrors('commonProperty') ? 'is-invalid' : ''}" />
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('commonProperty')}" th:errors="*{validationExpression}"></div>
+            <label>Is common property</label>
+        </div>
+
+        <div class="form-group">
+            <label>This property is used in the following services</label>
+            <select type="select"
+                   multiple
+                   class="form-control"
+                   th:field="*{services}"
+                   th:classappend="${#fields.hasErrors('services') ? 'is-invalid' : ''}">
+                <option th:each="service: ${services}"
+                        th:value="${service.key}"
+                        th:text="${service.name}" />
+            </select>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('services')}" th:errors="*{services}"></div>
+        </div>
+
+        <input type="submit" style="display: none; " id="submitButton"/>
+    </form>
+
+    <script>
+        $(document).ready(function(){
+            $("#saveButton").click(function(){
+                $("#submitButton").click();
+            })
+        });
+    </script>
+</div>
+</body>
+</html>
