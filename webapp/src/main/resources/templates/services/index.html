@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{template_basic}" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+
+<div layout:fragment="subheader" class="navbar navbar-light bg-light">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link" href="/services/new" th:href="@{/services/new}">
+                Create new
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div layout:fragment="content">
+    <h1>
+        Services
+    </h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Key</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="service,iter : ${services}">
+                <td th:text="${iter.index + 1}" />
+                <td th:text="${service.key}" />
+                <td th:text="${service.name}" />
+                <td th:text="${service.description}" />
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-danger"
+                           data-toggle="confirm"
+                           data-title="Warning"
+                           data-content="Do you really want to remove this record?"
+                           th:href="@{/services/}+${service.key}+'/delete'">
+                            Delete
+                        </a>
+                        <a class="btn btn-primary" th:href="@{/services/}+${service.key}">
+                            Edit
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        $(document).ready(function(){
+            $("[data-toggle='confirm']").click(function(){
+                $("#modal-dialog-title").text($(this).attr("data-title"));
+                $("#modal-dialog-content").text($(this).attr("data-content"));
+                $("#modal-dialog").modal('show');
+                window.delete_target = $(this).attr("href");
+                return false;
+            });
+            $("#modal-dialog").on("hidden.bs.modal", function(){
+                if ($("#modal-dialog-result").text() == "confirm") {
+                    window.location = window.delete_target;
+                }
+            })
+        });
+    </script>
+</div>
+</body>
+</html>

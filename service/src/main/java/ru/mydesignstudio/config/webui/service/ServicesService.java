@@ -64,10 +64,16 @@ public class ServicesService {
             throw new AppServiceKeyNotSetException();
         }
 
-        if (servicesRepository.findService(service.getKey()).isPresent()) {
-            throw new AppServiceKeyDuplicationException();
-        }
-
         return servicesRepository.saveService(service);
+    }
+
+    /**
+     * Delete an instance of a service.
+     *
+     * @param service instance to delete
+     * @return true if a service was deleted successfully
+     */
+    public boolean deleteService(@NonNull final AppService service) {
+        return servicesRepository.deleteService(service);
     }
 }

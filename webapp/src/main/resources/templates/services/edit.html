@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{template_basic}" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+
+<div layout:fragment="subheader" class="navbar navbar-light bg-light">
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link" href="/services" th:href="@{/services}">
+                Back
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" style="cursor: pointer" id="saveButton">
+                Save
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div layout:fragment="content">
+    <h1>
+        Edit a service
+    </h1>
+
+    <form action="/services" th:action="@{/services}" method="post" th:object="${service}" class="needs-validation" novalidate>
+        <div class="form-group">
+            <label>Service key</label>
+            <input type="text"
+                   class="form-control"
+                   th:field="*{key}"
+                   th:readonly="${edit_key_disabled}"
+                   th:classappend="${#fields.hasErrors('key') ? 'is-invalid' : ''}" />
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('key')}" th:errors="*{key}"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Service name</label>
+            <input type="text"
+                   class="form-control"
+                   th:field="*{name}"
+                   th:classappend="${#fields.hasErrors('key') ? 'is-invalid' : ''}" />
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Service description</label>
+            <textarea type="text"
+                      class="form-control"
+                      th:field="*{description}"
+                      th:classappend="${#fields.hasErrors('description') ? 'is-invalid' : ''}" />
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+        </div>
+
+        <input type="submit" style="display: none; " id="submitButton"/>
+    </form>
+
+    <script>
+        $(document).ready(function(){
+            $("#saveButton").click(function(){
+                $("#submitButton").click();
+            })
+        });
+    </script>
+</div>
+</body>
+</html>
