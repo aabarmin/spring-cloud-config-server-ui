@@ -10,6 +10,7 @@ import ru.mydesignstudio.config.webui.repository.EnvironmentsRepository;
 import ru.mydesignstudio.config.webui.service.exception.AppEnvironmentKeyDuplicationException;
 import ru.mydesignstudio.config.webui.service.exception.AppEnvironmentKeyNotSetException;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -53,10 +54,25 @@ public class EnvironmentsService {
             throw new AppEnvironmentKeyNotSetException();
         }
 
-        if (environmentsRepository.findEnvironment(environment.getKey()).isPresent()) {
-            throw new AppEnvironmentKeyDuplicationException();
-        }
-
         return environmentsRepository.saveEnvironment(environment);
+    }
+
+    /**
+     * Get all the registered environments.
+     *
+     * @return a list of available environments
+     */
+    public List<AppEnvironment> findAll() {
+        return environmentsRepository.findAll();
+    }
+
+    /**
+     * Deletes an environment.
+     *
+     * @param environment to be deleted
+     * @return true if deleted correctly
+     */
+    public boolean deleteEnvironment(AppEnvironment environment) {
+        return environmentsRepository.deleteEnvironment(environment);
     }
 }

@@ -2,6 +2,7 @@ package ru.mydesignstudio.config.webui.repository;
 
 import ru.mydesignstudio.config.webui.model.AppEnvironment;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -23,4 +24,19 @@ public interface EnvironmentsRepository {
      * @return saved instance
      */
     AppEnvironment saveEnvironment(AppEnvironment environment);
+
+    /**
+     * Get all the registered environments.
+     *
+     * @return a list of available environments
+     */
+    List<AppEnvironment> findAll();
+
+    /**
+     * Deletes an environment.
+     *
+     * @param environment to be deleted
+     * @return true if deleted correctly
+     */
+    boolean deleteEnvironment(AppEnvironment environment);
 }

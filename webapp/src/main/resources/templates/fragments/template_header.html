@@ -24,6 +24,11 @@
                         Properties
                     </a>
                 </li>
+                <li class="nav-item" th:classappend="${nav_active=='environments' ? 'active' : ''}">
+                    <a class="nav-link" href="/environments" th:href="@{/environments}">
+                        Environments
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
