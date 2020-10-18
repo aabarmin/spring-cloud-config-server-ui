@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import ru.mydesignstudio.config.webui.model.AppEnvironment;
 import ru.mydesignstudio.config.webui.service.EnvironmentsService;
 
@@ -39,12 +40,23 @@ public class EnvironmentsController {
     }
 
     @GetMapping("/environments/{key}")
-    public ModelAndView edit(ModelAndView modelAndView, @PathVariable("key") String key) {
+    public ModelAndView edit(ModelAndView modelAndView, @PathVariable("key") String key) throws Exception {
         modelAndView.setViewName("environments/edit");
         modelAndView.addObject("edit_key_disabled", true);
+        modelAndView.addObject("config_loader_url", createUriForConfiguration(key));
         environmentsService.findEnvironment(key)
                 .ifPresent(environments -> modelAndView.addObject("environment", environments));
         return modelAndView;
+    }
+
+    private String createUriForConfiguration(String environmentKey) throws Exception {
+        return MvcUriComponentsBuilder.fromMethod(
+                EnvironmentConfigurationController.class,
+                EnvironmentConfigurationController.class.getDeclaredMethod("getConfigForEnvironment", String.class),
+                environmentKey
+        )
+                .build()
+                .toUriString();
     }
 
     @GetMapping("/environments/{key}/delete")

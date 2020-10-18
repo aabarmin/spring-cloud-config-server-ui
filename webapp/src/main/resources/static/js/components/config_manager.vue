@@ -25,7 +25,7 @@
             Services
           </button>
         </div>
-        <div id="servicesSection" class="collapse show">
+        <div id="servicesSection" class="collapse">
           <div class="card-body">
             <div>
               <services-appender v-bind:services="config.services"
