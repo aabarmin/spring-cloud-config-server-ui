@@ -25,7 +25,9 @@ $(document).ready(function(){
                             key: "shared.somehow.1",
                             description: "this property is shared across services",
                             isCommon: false,
-                            services:  []
+                            services:  [
+                                "service-ingest-type-identifier"
+                            ]
                         }
                     ],
                     services: [

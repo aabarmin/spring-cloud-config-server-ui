@@ -32,7 +32,8 @@
                                  v-bind:services-config="config.servicesConfig" />
             </div>
             <div>
-              <services-list v-bind:services="config.servicesConfig" />
+              <services-list v-bind:services="config.servicesConfig"
+                             v-bind:properties="config.properties" />
             </div>
           </div>
         </div>

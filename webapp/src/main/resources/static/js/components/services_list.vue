@@ -2,6 +2,7 @@
   <div class="accordion">
     <services-item v-for="service in services"
                    v-bind:service="service"
+                   v-bind:properties="properties"
                    v-on:service-remove="removeService"
                    :key="service.service.key" />
   </div>

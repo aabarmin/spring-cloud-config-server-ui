@@ -30,7 +30,13 @@
         </div>
         <div class="row">
           <div class="col-sm-12">
-
+            <property-appender v-bind:all-properties="availableProperties"
+                               v-bind:used-properties="service.properties" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <property-list v-bind:properties="service.properties" />
           </div>
         </div>
       </div>
@@ -40,17 +46,27 @@
 
 <script>
 module.exports = {
-  props: ['service'],
+  props: ['service', 'properties'],
   computed: {
     expandTarget: function() {
       return "#" + this.service.service.key;
     },
     expandId: function() {
       return this.service.service.key;
+    },
+    availableProperties: function() {
+      return this.properties.filter(prop => {
+        return prop.isCommon === false &&
+            (prop.services.indexOf(this.service.service.key) != -1)
+      });
     }
   },
   methods: {
 
+  },
+  components: {
+    'property-appender': httpVueLoader("/js/components/property_appender.vue"),
+    'property-list': httpVueLoader("/js/components/property_list.vue")
   }
 }
 </script>
