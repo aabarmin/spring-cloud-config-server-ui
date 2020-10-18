@@ -8,6 +8,7 @@ $(document).ready(function(){
         data: function() {
             return {
                 config: {
+                    debug: false,
                     properties: [
                         {
                             key: "common.key.1",

@@ -40,7 +40,7 @@
       </div>
     </div>
 
-    <pre>{{config}}</pre>
+    <pre v-if="config.debug === true">{{config}}</pre>
   </div>
 </template>
 
