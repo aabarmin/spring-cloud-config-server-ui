@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" layout:decorate="~{template_basic}" xmlns:layout="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <script src="/js/components/config_management.js" th:src="@{/js/components/config_management.js}"></script>
+</head>
 <body>
 
 <div layout:fragment="subheader" class="navbar navbar-light bg-light">
@@ -54,6 +58,8 @@
 
         <input type="submit" style="display: none; " id="submitButton"/>
     </form>
+
+    <div id="config_app"></div>
 
     <script>
         $(document).ready(function(){
