@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" layout:decorate="~{template_basic}" xmlns:layout="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <script src="/js/components/config_management.js"
+            th:if="${!#strings.isEmpty(environment.key)}"
+            th:src="@{/js/components/config_management.js}"></script>
+</head>
 <body>
 
 <div layout:fragment="subheader" class="navbar navbar-light bg-light">
@@ -55,10 +61,36 @@
         <input type="submit" style="display: none; " id="submitButton"/>
     </form>
 
+    <div id="config_app"
+         th:if="${!#strings.isEmpty(environment.key)}"></div>
+
+    <script th:if="${!#strings.isEmpty(environment.key)}">
+        $(document).ready(function() {
+            let url = "[[${config_loader_url}]]";
+            $.ajax({
+                url: url,
+                method: "GET",
+                dataType: "json"
+            }).done(function(data) {
+                window.configManager.config = data;
+            });
+        });
+    </script>
+
     <script>
         $(document).ready(function(){
             $("#saveButton").click(function(){
-                $("#submitButton").click();
+                let url = "[[${config_loader_url}]]";
+                let data = window.configManager.config;
+                $.ajax({
+                    url: url,
+                    method: "POST",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(data)
+                }).done(function(response) {
+                    $("#submitButton").click();
+                });
             })
         });
     </script>
